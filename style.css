@@ -109,8 +109,12 @@ img{max-width:100%;display:block}
 
 .hero{min-height:94vh;display:flex;flex-direction:column;justify-content:flex-end;
   padding:120px 0 44px;position:relative}
-.hero h1{font-size:clamp(46px,9.4vw,142px);letter-spacing:-.055em;line-height:.84;
-  text-transform:lowercase;max-width:9ch}
+.hero .wrap{width:100%}
+.hero h1{font-size:clamp(42px,6.4vw,104px);letter-spacing:-.05em;line-height:.86;
+  text-transform:lowercase;max-width:8ch}
+@media(min-width:1000px){
+  .hero h1,.hero-spod{max-width:56%}   /* pravá polovica patrí modelu */
+}
 .hero h1 .r2{display:block;padding-left:.09em}
 .hero h1 .r3{display:block;padding-left:.22em}
 .hero h1 u{text-decoration:none;color:var(--c1)}

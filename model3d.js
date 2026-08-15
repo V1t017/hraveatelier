@@ -10,7 +10,7 @@ var GEO={"plaster":{p:[-1.617,0.153,-1.82,-0.853,2.22,-1.82,0.45,1.344,-1.82,0.4
 
   /* Choreografia — celý pohyb sa nastavuje tu. p = bod scrollu (0 vrch, 1 spodok) */
   var ZASTAVKY = [
-    { p: 0.00, x:  2.6, y: 1.1, z:  0.0, rot: -0.60, sklon: 0.06, zoom: 0.82, kamY: 1.9 },
+    { p: 0.00, x:  3.0, y: 0.5, z:  1.0, rot: -0.60, sklon: 0.06, zoom: 1.05, kamY: 1.8 },
     { p: 0.30, x: -2.6, y: 0.1, z:  0.7, rot:  0.80, sklon: 0.03, zoom: 1.05, kamY: 1.5 },
     { p: 0.55, x:  2.5, y: 0.1, z:  1.3, rot:  3.40, sklon: 0.02, zoom: 1.22, kamY: 1.2 },
     { p: 0.78, x: -2.1, y:-0.4, z:  0.0, rot:  4.30, sklon: 0.60, zoom: 1.05, kamY: 5.0 },
@@ -20,13 +20,21 @@ var GEO={"plaster":{p:[-1.617,0.153,-1.82,-0.853,2.22,-1.82,0.45,1.344,-1.82,0.4
 
   var pokoj = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var host = document.getElementById("scena");
-  if (!host) { return; }
-  if (pokoj || typeof THREE === "undefined") { host.style.display = "none"; return; }
+
+  /* diagnostika — v konzole prehliadača uvidíte, prečo model prípadne nebeží */
+  function chyba(preco) {
+    console.warn("[3D model] nebeží: " + preco);
+    if (host) { host.style.display = "none"; }
+  }
+  if (!host) { chyba("na stránke chýba <div id=\"scena\">"); return; }
+  if (typeof THREE === "undefined") { chyba("nenačítala sa knižnica three.js"); return; }
+  if (pokoj) { chyba("používateľ má vypnuté animácie (prefers-reduced-motion)"); return; }
 
   var renderer;
   try {
     renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: "high-performance" });
-  } catch (e) { host.style.display = "none"; return; }
+  } catch (e) { chyba("prehliadač nepodporuje WebGL"); return; }
+  console.log("[3D model] beží, three.js r" + THREE.REVISION);
 
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.setSize(window.innerWidth, window.innerHeight);
@@ -94,8 +102,8 @@ var GEO={"plaster":{p:[-1.617,0.153,-1.82,-0.853,2.22,-1.82,0.45,1.344,-1.82,0.4
     return ZASTAVKY[0];
   }
 
-  var ciel  = { x:2.6, y:1.1, z:0, rot:-0.60, sklon:0.06, zoom:0.82, kamY:1.9 };
-  var teraz = { x:2.6, y:1.1, z:0, rot:-0.60, sklon:0.06, zoom:0.82, kamY:1.9 };
+  var ciel  = { x:3.0, y:0.5, z:1.0, rot:-0.60, sklon:0.06, zoom:1.05, kamY:1.8 };
+  var teraz = { x:3.0, y:0.5, z:1.0, rot:-0.60, sklon:0.06, zoom:1.05, kamY:1.8 };
   var mobil = window.innerWidth < 900;
   var koniec = document.getElementById("koniec3d");
 
