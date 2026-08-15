@@ -112,8 +112,8 @@ img{max-width:100%;display:block}
 #scena canvas{display:block;width:100%;height:100%}
 .obsah{position:relative;z-index:1}
 
-.hero{min-height:94vh;display:flex;flex-direction:column;justify-content:flex-end;
-  padding:120px 0 44px;position:relative}
+.hero{min-height:88vh;display:flex;flex-direction:column;justify-content:center;
+  padding:70px 0 60px;position:relative}
 .hero .wrap{width:100%}
 .hero h1{font-size:clamp(42px,6.4vw,104px);letter-spacing:-.05em;line-height:.86;
   text-transform:lowercase;max-width:8ch}
@@ -121,13 +121,16 @@ img{max-width:100%;display:block}
   .hero h1,.hero-spod{max-width:56%}   /* pravá polovica patrí modelu */
 }
 @media(max-width:999px){
-  .hero{min-height:100vh;padding-top:46vh}   /* horná polovica patrí modelu */
+  .hero{min-height:86vh;justify-content:flex-end;padding:30vh 0 34px}
+}
+@media(max-width:620px){
+  .hero{padding-top:26vh}
 }
 .hero h1 .r2{display:block;padding-left:.09em}
 .hero h1 .r3{display:block;padding-left:.22em}
 .hero h1 u{text-decoration:none;color:var(--c1)}
 .hero-spod{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;
-  margin-top:clamp(36px,6vw,72px);flex-wrap:wrap}
+  margin-top:clamp(26px,3.4vw,44px);flex-wrap:wrap}
 .hero-spod p{max-width:32ch;font-size:clamp(15px,1.5vw,18px);color:#5A5751}
 .sipka{font-family:var(--mono);font-size:9px;letter-spacing:.24em;text-transform:uppercase;
   color:var(--sivá);animation:bob 2.6s ease-in-out infinite}

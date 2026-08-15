@@ -108,10 +108,10 @@ var GEO={"plaster":{p:[-1.617,0.153,-1.82,-0.853,2.22,-1.82,0.45,1.344,-1.82,0.4
     var p = limit > 0 ? window.scrollY / limit : 0;
     var s = stavPre(Math.min(Math.max(p, 0), 1));
     ciel.x = s.x * (mobil ? 0.26 : 1);
-    ciel.y = s.y + (mobil ? 2.1 : 0);
+    ciel.y = s.y + (mobil ? 2.5 : 0);
     ciel.z = s.z * (mobil ? 0.45 : 1);
     ciel.rot = s.rot; ciel.sklon = s.sklon;
-    ciel.zoom = s.zoom * (mobil ? 0.6 : 1);
+    ciel.zoom = s.zoom * (mobil ? 0.5 : 1);
     ciel.kamY = s.kamY;
   }
 
@@ -133,8 +133,8 @@ var GEO={"plaster":{p:[-1.617,0.153,-1.82,-0.853,2.22,-1.82,0.45,1.344,-1.82,0.4
     /* jeden pekný pohľad, žiadny pohyb, žiadna slučka */
     var stat = { x: 2.4, y: 0.7, z: 0.4, rot: 0.55, sklon: 0.14, zoom: 0.95, kamY: 2.3 };
     for (var kk in stat) { teraz[kk] = stat[kk]; ciel[kk] = stat[kk]; }
-    if (mobil) { teraz.x = ciel.x = 0; teraz.y = ciel.y = 2.3;
-                 teraz.zoom = ciel.zoom = 0.55; teraz.kamY = ciel.kamY = 2.0; }
+    if (mobil) { teraz.x = ciel.x = 0; teraz.y = ciel.y = 2.6;
+                 teraz.zoom = ciel.zoom = 0.46; teraz.kamY = ciel.kamY = 2.0; }
     obal.position.set(teraz.x, teraz.y, teraz.z);
     obal.rotation.y = teraz.rot;
     obal.rotation.x = teraz.sklon;
