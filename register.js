@@ -15,21 +15,18 @@
 
   if (!dotyk) {
     var box = document.createElement("div");
-    box.className = "nahlad ph";
+    box.className = "nahlad";
     document.body.appendChild(box);
 
     var cx = 0, cy = 0, x = 0, y = 0, aktivny = false;
 
     Array.prototype.forEach.call(riadky, function (r) {
       r.addEventListener("mouseenter", function () {
-        box.innerHTML = "<b>" + (r.getAttribute("data-nazov") || "") + "</b>" +
-                        "hlavná fotografia · doplní klientka";
         var cs = getComputedStyle(r);
-        box.style.background = cs.getPropertyValue("--rc") || "#F3F2EF";
-        var tx = (cs.getPropertyValue("--rt") || "#fff").trim();
-        box.style.color = tx;
-        box.style.borderColor = "transparent";
-        box.querySelector("b").style.color = tx;
+        var farba = (cs.getPropertyValue("--rc") || "#131313").trim();
+        box.innerHTML = "<b>" + (r.getAttribute("data-nazov") || "") + "</b>" +
+                        "<span>foto doplní klientka</span>";
+        box.style.borderColor = farba;
         box.classList.add("vidno");
         aktivny = true;
       });
@@ -46,8 +43,10 @@
       if (!aktivny) { return; }
       if (pokoj) { x = cx; y = cy; }          /* bez dobiehania */
       else { x += (cx - x) * 0.14; y += (cy - y) * 0.14; }
-      box.style.transform = "translate(" + (x - box.offsetWidth / 2) + "px," +
-                            (y - box.offsetHeight / 2) + "px)";
+      var px = x + 28, py = y - box.offsetHeight / 2;
+      if (px + box.offsetWidth > window.innerWidth - 16) { px = x - box.offsetWidth - 28; }
+      py = Math.max(12, Math.min(py, window.innerHeight - box.offsetHeight - 12));
+      box.style.transform = "translate(" + px + "px," + py + "px)";
     })();
   }
 
