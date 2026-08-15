@@ -11,6 +11,7 @@
 
   /* Ak by IntersectionObserver chýbal, ukáž všetko a skonči. */
   if (pokoj || !("IntersectionObserver" in window)) {
+    /* obsah zobrazíme celý naraz, bez nabiehania */
     document.documentElement.classList.add("no-js");
     return;
   }

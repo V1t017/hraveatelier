@@ -28,13 +28,15 @@ var GEO={"plaster":{p:[-1.617,0.153,-1.82,-0.853,2.22,-1.82,0.45,1.344,-1.82,0.4
   }
   if (!host) { chyba("na stránke chýba <div id=\"scena\">"); return; }
   if (typeof THREE === "undefined") { chyba("nenačítala sa knižnica three.js"); return; }
-  if (pokoj) { chyba("používateľ má vypnuté animácie (prefers-reduced-motion)"); return; }
+  /* Pri vypnutých animáciách model NEVYPÍNAME — len ho prestaneme hýbať.
+     Vykreslí sa raz, staticky, v peknom uhle. */
 
   var renderer;
   try {
     renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: "high-performance" });
   } catch (e) { chyba("prehliadač nepodporuje WebGL"); return; }
-  console.log("[3D model] beží, three.js r" + THREE.REVISION);
+  console.log("[3D model] beží, three.js r" + THREE.REVISION +
+              (pokoj ? " — staticky, systém má vypnuté animácie" : ""));
 
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.setSize(window.innerWidth, window.innerHeight);
@@ -132,6 +134,27 @@ var GEO={"plaster":{p:[-1.617,0.153,-1.82,-0.853,2.22,-1.82,0.45,1.344,-1.82,0.4
     kamera.position.y = teraz.kamY;
     kamera.lookAt(teraz.x * 0.32, teraz.y - 0.25, 0);
     renderer.render(scena, kamera);
+  }
+
+  if (pokoj) {
+    /* jeden pekný pohľad, žiadny pohyb, žiadna slučka */
+    var stat = { x: 0, y: -0.1, z: 0.6, rot: 0.55, sklon: 0.12, zoom: 1.0, kamY: 2.2 };
+    for (var kk in stat) { teraz[kk] = stat[kk]; ciel[kk] = stat[kk]; }
+    if (mobil) { teraz.zoom = ciel.zoom = 0.62; teraz.y = ciel.y = 1.2; }
+    obal.position.set(teraz.x, teraz.y, teraz.z);
+    obal.rotation.y = teraz.rot;
+    obal.rotation.x = teraz.sklon;
+    obal.scale.setScalar(teraz.zoom);
+    kamera.position.y = teraz.kamY;
+    kamera.lookAt(0, teraz.y - 0.25, 0);
+    renderer.render(scena, kamera);
+    window.addEventListener("resize", function () {
+      kamera.aspect = window.innerWidth / window.innerHeight;
+      kamera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.render(scena, kamera);
+    }, { passive: true });
+    return;
   }
 
   window.addEventListener("scroll", citajScroll, { passive: true });

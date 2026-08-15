@@ -13,7 +13,7 @@
   var dotyk = window.matchMedia && window.matchMedia("(hover: none)").matches;
   var pokoj = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  if (!dotyk && !pokoj) {
+  if (!dotyk) {
     var box = document.createElement("div");
     box.className = "nahlad ph";
     document.body.appendChild(box);
@@ -41,8 +41,8 @@
     (function plyn() {
       requestAnimationFrame(plyn);
       if (!aktivny) { return; }
-      x += (cx - x) * 0.14;
-      y += (cy - y) * 0.14;
+      if (pokoj) { x = cx; y = cy; }          /* bez dobiehania */
+      else { x += (cx - x) * 0.14; y += (cy - y) * 0.14; }
       box.style.transform = "translate(" + (x - box.offsetWidth / 2) + "px," +
                             (y - box.offsetHeight / 2) + "px)";
     })();
