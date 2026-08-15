@@ -1,0 +1,294 @@
+/* ==========================================================
+   HRAVÉ ATELIÉR
+   Register — portfólio ako typografický zoznam.
+   Tma / krieda / šesť projektových farieb.
+   Syne · Chivo · Chivo Mono
+   ========================================================== */
+
+:root{
+  --tma:#131313;
+  --tma2:#1D1D1D;
+  --krieda:#EFEEE9;
+  --sivá:#8A8781;
+  --linka:rgba(239,238,233,.16);
+  --linka-t:rgba(19,19,19,.14);
+
+  /* projektové farby — každý projekt má svoju */
+  --c1:#FF5A1F;  /* oranžová */
+  --c2:#2F5CFF;  /* modrá */
+  --c3:#00A36C;  /* zelená */
+  --c4:#F2C200;  /* žltá */
+  --c5:#B14BE8;  /* fialová */
+  --c6:#FF7BAC;  /* ružová */
+
+  --akcent:var(--c1);   /* prepisuje sa na podstránkach */
+
+  --disp:'Syne',system-ui,sans-serif;
+  --body:'Chivo',system-ui,sans-serif;
+  --mono:'Chivo Mono',ui-monospace,monospace;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--tma);color:var(--krieda);font-family:var(--body);
+  font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,h4{font-family:var(--disp);font-weight:800;line-height:.92;letter-spacing:-.035em}
+a{color:inherit}
+img{max-width:100%;display:block}
+.wrap{max-width:1400px;margin:0 auto;padding:0 clamp(18px,3.5vw,52px)}
+.uzsi{max-width:760px;margin:0 auto;padding:0 clamp(18px,3.5vw,52px)}
+:focus-visible{outline:2px solid var(--akcent);outline-offset:4px}
+.skip{position:absolute;left:-9999px}
+.skip:focus{left:20px;top:10px;z-index:200;background:var(--akcent);color:var(--tma);padding:10px 18px}
+
+.lbl{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--sivá)}
+
+/* ---------- pracovná lišta ---------- */
+.draftbar{background:var(--c4);color:var(--tma);font-family:var(--mono);font-size:10px;
+  padding:8px 20px;text-align:center;line-height:1.9;position:relative;z-index:100;letter-spacing:.04em}
+.draftbar b{font-family:var(--disp);font-weight:800;font-size:11px;letter-spacing:.02em}
+.draftbar a{color:var(--tma)}
+
+/* ---------- hlavička ---------- */
+.nav{position:sticky;top:0;z-index:80;background:rgba(19,19,19,.82);
+  backdrop-filter:blur(16px);border-bottom:1px solid var(--linka)}
+.nav-in{max-width:1400px;margin:0 auto;padding:0 clamp(18px,3.5vw,52px);height:62px;
+  display:flex;align-items:center;justify-content:space-between;gap:16px}
+.znak{font-family:var(--disp);font-weight:800;font-size:19px;letter-spacing:-.05em;
+  text-decoration:none;text-transform:lowercase;display:flex;align-items:baseline;gap:.34em}
+.znak em{font-style:normal;color:var(--sivá);font-weight:400;font-family:var(--mono);
+  font-size:9.5px;letter-spacing:.2em;text-transform:uppercase}
+/* každé písmeno mena inou projektovou farbou */
+.znak s{text-decoration:none}
+.znak s:nth-child(1){color:var(--c1)} .znak s:nth-child(2){color:var(--c2)}
+.znak s:nth-child(3){color:var(--c3)} .znak s:nth-child(4){color:var(--c4)}
+.znak s:nth-child(5){color:var(--c5)}
+
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+  text-decoration:none;color:var(--sivá);transition:color .16s}
+.nav-links a:hover{color:var(--krieda)}
+.nav-links a[aria-current="page"]{color:var(--krieda)}
+
+.nav-check{position:absolute;opacity:0;width:1px;height:1px;pointer-events:none}
+.nav-toggle{display:none;background:transparent;border:1px solid var(--linka);width:42px;height:38px;
+  cursor:pointer;padding:0;flex-direction:column;align-items:center;justify-content:center;gap:4px;
+  flex-shrink:0;-webkit-tap-highlight-color:transparent}
+.nav-toggle span{display:block;width:18px;height:1.5px;background:var(--krieda);
+  transition:transform .22s ease,opacity .16s}
+.nav-check:checked ~ .nav-toggle span:nth-child(1){transform:translateY(5.5px) rotate(45deg)}
+.nav-check:checked ~ .nav-toggle span:nth-child(2){opacity:0}
+.nav-check:checked ~ .nav-toggle span:nth-child(3){transform:translateY(-5.5px) rotate(-45deg)}
+@media(max-width:860px){
+  .nav-toggle{display:flex}
+  .nav-links{position:absolute;top:100%;left:0;right:0;background:var(--tma);
+    border-bottom:1px solid var(--linka);flex-direction:column;align-items:stretch;gap:0;
+    padding:6px clamp(18px,3.5vw,52px) 20px;display:none}
+  .nav-check:checked ~ .nav-links{display:flex}
+  .nav-links a{padding:16px 0;border-bottom:1px solid var(--linka);font-size:12px}
+}
+
+/* ---------- tlačidlá ---------- */
+.btn{display:inline-block;font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;
+  text-transform:uppercase;padding:16px 28px;text-decoration:none;border:0;cursor:pointer;
+  transition:transform .16s,background .16s,color .16s}
+.btn-plny{background:var(--akcent);color:var(--tma)}
+.btn-plny:hover{transform:translate(-2px,-2px)}
+.btn-obrys{border:1px solid var(--linka);color:var(--krieda)}
+.btn-obrys:hover{background:var(--krieda);color:var(--tma);border-color:var(--krieda)}
+.btn-tmavy{background:var(--tma);color:var(--krieda)}
+.btn-tmavy:hover{transform:translate(-2px,-2px)}
+
+/* ==========================================================
+   HERO — typografia cez 3D model
+   ========================================================== */
+#scena{position:fixed;inset:0;z-index:0;pointer-events:none}
+#scena canvas{display:block;width:100%;height:100%}
+.obsah{position:relative;z-index:1}
+
+.hero{min-height:94vh;display:flex;flex-direction:column;justify-content:center;
+  padding:80px 0 40px;position:relative}
+.hero h1{font-size:clamp(52px,13.5vw,220px);letter-spacing:-.055em;line-height:.82;
+  text-transform:lowercase}
+.hero h1 .r2{display:block;padding-left:.09em}
+.hero h1 .r3{display:block;padding-left:.22em}
+.hero h1 u{text-decoration:none;color:var(--c1)}
+.hero-spod{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;
+  margin-top:clamp(36px,6vw,72px);flex-wrap:wrap}
+.hero-spod p{max-width:34ch;font-size:clamp(15px,1.5vw,18px);color:#B6B3AC}
+.sipka{font-family:var(--mono);font-size:9px;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--sivá);animation:bob 2.6s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+@media (prefers-reduced-motion:reduce){.sipka{animation:none}}
+
+/* ---------- panely pri 3D ---------- */
+.panel{min-height:100vh;display:flex;align-items:center;padding:90px 0}
+.panel-in{max-width:380px}
+.panel.vpravo .panel-in{margin-left:auto}
+.panel .cislo{font-family:var(--mono);font-size:11px;letter-spacing:.2em;
+  color:var(--akcent);display:block;margin-bottom:16px}
+.panel h2{font-size:clamp(30px,4.4vw,58px);margin-bottom:14px;text-transform:lowercase}
+.panel p{color:#B6B3AC;font-size:16.5px}
+@media(max-width:900px){
+  .panel-in,.panel.vpravo .panel-in{max-width:none;margin:0}
+  .panel{align-items:flex-end;padding:70px 0}
+  .panel-in{background:rgba(19,19,19,.9);padding:26px 24px;border:1px solid var(--linka)}
+}
+
+/* ---------- sekcie ---------- */
+section{padding:clamp(70px,9vw,132px) 0;position:relative;z-index:2;background:var(--tma)}
+section.pruh{padding:0}
+.hlava{display:flex;justify-content:space-between;align-items:flex-end;gap:26px;
+  flex-wrap:wrap;margin-bottom:clamp(30px,4vw,56px)}
+.hlava h2{font-size:clamp(34px,6.5vw,88px);text-transform:lowercase;letter-spacing:-.05em}
+.text{max-width:60ch;font-size:clamp(17px,1.8vw,21px);color:#B6B3AC}
+.text p+p{margin-top:18px}
+.text strong{color:var(--krieda);font-weight:500}
+
+/* ==========================================================
+   SIGNATURE — register projektov
+   ========================================================== */
+.register{border-top:1px solid var(--linka)}
+.riadok{display:grid;grid-template-columns:clamp(56px,7vw,110px) 1fr auto;
+  align-items:center;gap:clamp(12px,3vw,40px);
+  padding:clamp(20px,3.2vw,38px) clamp(18px,3.5vw,52px);
+  border-bottom:1px solid var(--linka);text-decoration:none;position:relative;
+  transition:background .28s cubic-bezier(.16,.84,.44,1),color .28s}
+.riadok .idx{font-family:var(--mono);font-size:clamp(11px,1.2vw,14px);color:var(--sivá);
+  transition:color .28s;letter-spacing:.05em}
+.riadok h3{font-size:clamp(26px,5.4vw,68px);text-transform:lowercase;letter-spacing:-.045em;
+  transition:transform .34s cubic-bezier(.16,.84,.44,1)}
+.riadok .meta{font-family:var(--mono);font-size:clamp(9px,.95vw,11px);letter-spacing:.15em;
+  text-transform:uppercase;color:var(--sivá);text-align:right;transition:color .28s;
+  display:flex;flex-direction:column;gap:5px}
+.riadok:hover{background:var(--rc);color:var(--tma)}
+.riadok:hover .idx,.riadok:hover .meta{color:rgba(19,19,19,.72)}
+.riadok:hover h3{transform:translateX(clamp(6px,1.4vw,22px))}
+.riadok:focus-visible{background:var(--rc);color:var(--tma);outline-offset:-3px}
+.riadok.hide{display:none}
+/* farebný pásik na mobile namiesto hoveru */
+.riadok::before{content:"";position:absolute;left:0;top:0;bottom:0;width:0;
+  background:var(--rc);transition:width .2s}
+@media(hover:none){
+  .riadok::before{width:4px}
+  .riadok{padding-left:calc(clamp(18px,3.5vw,52px) + 12px)}
+}
+
+/* náhľad, ktorý sleduje kurzor */
+.nahlad{position:fixed;top:0;left:0;width:min(30vw,420px);aspect-ratio:4/3;
+  pointer-events:none;z-index:60;opacity:0;
+  transition:opacity .22s ease;will-change:transform}
+.nahlad.vidno{opacity:1}
+@media(max-width:900px),(hover:none){.nahlad{display:none}}
+
+/* ---------- filtre ---------- */
+.filtre{display:flex;gap:0;flex-wrap:wrap;border-top:1px solid var(--linka);
+  border-bottom:1px solid var(--linka)}
+.filtre button{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  padding:16px clamp(14px,2vw,26px);border:0;border-right:1px solid var(--linka);
+  background:transparent;color:var(--sivá);cursor:pointer;transition:all .16s}
+.filtre button:hover{color:var(--krieda)}
+.filtre button.on{background:var(--krieda);color:var(--tma)}
+.filtre button i{font-style:normal;opacity:.5;margin-left:7px}
+
+/* ---------- fotorámik ---------- */
+.ph{background:var(--tma2);border:1px solid var(--linka);display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;color:var(--sivá);
+  font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;
+  padding:20px;gap:7px;line-height:2;overflow:hidden}
+.ph b{font-family:var(--disp);font-weight:800;font-size:15px;letter-spacing:-.02em;
+  text-transform:lowercase;color:var(--krieda)}
+.ph-svetly{background:#E3E1DA;border-color:var(--linka-t);color:#6E6B65}
+.ph-svetly b{color:var(--tma)}
+
+/* ==========================================================
+   FAREBNÝ PRUH — plný záber
+   ========================================================== */
+.blok{background:var(--akcent);color:var(--tma);padding:clamp(70px,9vw,130px) 0}
+.blok h2{font-size:clamp(34px,7vw,96px);text-transform:lowercase;letter-spacing:-.05em;max-width:14ch}
+.blok p{max-width:52ch;margin-top:22px;font-size:clamp(17px,1.8vw,21px);color:rgba(19,19,19,.78)}
+.blok .lbl{color:rgba(19,19,19,.6)}
+
+/* ---------- postup ---------- */
+.postup{border-top:1px solid var(--linka)}
+.krok{display:grid;grid-template-columns:clamp(56px,7vw,110px) 1fr 1.4fr;
+  gap:clamp(12px,3vw,40px);padding:clamp(24px,3vw,40px) 0;border-bottom:1px solid var(--linka);
+  align-items:baseline}
+.krok .idx{font-family:var(--mono);font-size:12px;color:var(--akcent);letter-spacing:.1em}
+.krok h3{font-size:clamp(21px,2.6vw,34px);text-transform:lowercase}
+.krok p{color:#B6B3AC;font-size:16px}
+@media(max-width:760px){.krok{grid-template-columns:1fr;gap:10px}}
+
+/* ==========================================================
+   PODSTRÁNKA PROJEKTU
+   ========================================================== */
+.p-hlava{padding:clamp(30px,5vw,70px) 0 0}
+.p-hlava .lbl{display:block;margin-bottom:20px}
+.p-hlava h1{font-size:clamp(38px,9vw,140px);text-transform:lowercase;letter-spacing:-.055em;
+  line-height:.86;max-width:13ch}
+.p-hlava .claim{max-width:46ch;margin-top:26px;font-size:clamp(17px,1.9vw,22px);color:#B6B3AC}
+.p-foto{aspect-ratio:16/9;margin-top:clamp(34px,5vw,64px)}
+
+.udaje{display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid var(--linka);
+  border-bottom:1px solid var(--linka)}
+.udaje div{padding:clamp(20px,2.6vw,32px) 0;padding-right:20px;border-right:1px solid var(--linka)}
+.udaje div:last-child{border-right:0}
+.udaje dt{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--sivá);margin-bottom:9px}
+.udaje dd{font-family:var(--disp);font-weight:800;font-size:clamp(16px,1.7vw,22px);
+  letter-spacing:-.02em}
+@media(max-width:860px){
+  .udaje{grid-template-columns:repeat(2,1fr)}
+  .udaje div{border-bottom:1px solid var(--linka);padding-left:16px}
+  .udaje div:nth-child(2n){border-right:0}
+}
+
+.citat{padding:clamp(40px,6vw,80px) 0}
+.citat p{font-family:var(--disp);font-weight:800;font-size:clamp(26px,4.6vw,58px);
+  line-height:1.02;letter-spacing:-.04em;color:var(--akcent);max-width:18ch}
+.citat cite{display:block;margin-top:22px;font-family:var(--mono);font-size:9.5px;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--sivá);font-style:normal}
+
+.gal{display:grid;grid-template-columns:repeat(6,1fr);gap:clamp(8px,1vw,14px)}
+.g-full{grid-column:span 6;aspect-ratio:16/9}
+.g-pol{grid-column:span 3;aspect-ratio:4/3}
+.g-tret{grid-column:span 2;aspect-ratio:3/4}
+@media(max-width:860px){
+  .gal{grid-template-columns:repeat(2,1fr)}
+  .g-full,.g-pol{grid-column:span 2}.g-tret{grid-column:span 1}
+}
+
+/* ---------- formulár ---------- */
+.kontakt{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(34px,5vw,80px)}
+.f{margin-bottom:20px}
+.f label{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--sivá);margin-bottom:9px}
+.f input,.f textarea,.f select{width:100%;padding:14px 0;border:0;
+  border-bottom:1px solid var(--linka);background:transparent;font-family:var(--body);
+  font-size:17px;color:var(--krieda)}
+.f input:focus,.f textarea:focus,.f select:focus{outline:0;border-bottom-color:var(--akcent)}
+.f select option{background:var(--tma)}
+.f textarea{min-height:120px;resize:vertical}
+.f2{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.karta-k{border-top:1px solid var(--linka);padding:26px 0}
+.karta-k .lbl{display:block;margin-bottom:12px;color:var(--akcent)}
+.velky-tel{font-family:var(--disp);font-weight:800;font-size:clamp(28px,3.6vw,46px);
+  text-decoration:none;letter-spacing:-.04em;display:block}
+@media(max-width:900px){.kontakt{grid-template-columns:1fr}}
+
+/* ---------- päta ---------- */
+footer{background:var(--krieda);color:var(--tma);padding:clamp(60px,8vw,110px) 0 36px;
+  position:relative;z-index:2}
+footer h2{font-size:clamp(38px,8vw,120px);text-transform:lowercase;letter-spacing:-.055em;
+  max-width:11ch;margin-bottom:34px}
+footer h2 u{text-decoration:none;color:var(--c2)}
+.foot{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;
+  padding-top:34px;border-top:1px solid var(--linka-t)}
+.foot h5{font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;
+  color:#6E6B65;margin-bottom:14px}
+.foot a{display:block;text-decoration:none;padding:4px 0;font-size:16px}
+.foot a:hover{color:var(--c2)}
+.legal{margin-top:44px;font-family:var(--mono);font-size:9px;color:#6E6B65;
+  display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;
+  text-transform:uppercase;letter-spacing:.14em}

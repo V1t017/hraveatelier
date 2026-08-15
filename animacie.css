@@ -1,0 +1,106 @@
+/* ==========================================================
+   SCROLL ANIMÁCIE — vlož do ktorejkoľvek stránky
+   <link rel="stylesheet" href="./animacie.css">
+   <script src="./animacie.js"></script>
+
+   Použitie: pridaj triedu na element, ktorý sa má objaviť.
+     class="an"            zdola nahor (základ)
+     class="an an-left"    zľava
+     class="an an-right"   sprava
+     class="an an-scale"   zväčšenie
+     class="an an-blur"    rozostrenie do ostra
+     class="an an-wipe"    odhalenie zľava doprava (na fotky)
+
+   Postupné nabiehanie detí:
+     <div class="an-stagger"> … deti sa objavia po sebe …
+
+   Ručné oneskorenie:
+     class="an" data-an-delay="200"
+
+   Opakovanie pri každom scrolle (inak len raz):
+     class="an" data-an-repeat
+
+   Počítadlo čísel:
+     <b data-count="1548">1548</b>
+     <b data-count="9.8" data-decimals="1">9,8</b>
+   ========================================================== */
+
+:root{
+  --an-cas:.75s;
+  --an-krivka:cubic-bezier(.16,.84,.44,1);
+  --an-posun:26px;
+}
+
+/* --- základný stav: skryté --- */
+.an{
+  opacity:0;
+  transform:translate3d(0,var(--an-posun),0);
+  transition:opacity var(--an-cas) var(--an-krivka),
+             transform var(--an-cas) var(--an-krivka),
+             filter var(--an-cas) var(--an-krivka),
+             clip-path var(--an-cas) var(--an-krivka);
+  will-change:opacity,transform;
+}
+.an-left  { transform:translate3d(calc(var(--an-posun) * -1.4),0,0) }
+.an-right { transform:translate3d(calc(var(--an-posun) *  1.4),0,0) }
+.an-scale { transform:scale(.94) }
+.an-blur  { filter:blur(9px); transform:translate3d(0,14px,0) }
+.an-wipe  { opacity:1; clip-path:inset(0 100% 0 0); transform:none }
+
+/* --- viditeľný stav --- */
+.an.je{
+  opacity:1;
+  transform:translate3d(0,0,0) scale(1);
+  filter:blur(0);
+  clip-path:inset(0 0 0 0);
+  will-change:auto;
+}
+
+/* --- postupné nabiehanie detí --- */
+.an-stagger > *{
+  opacity:0;
+  transform:translate3d(0,var(--an-posun),0);
+  transition:opacity var(--an-cas) var(--an-krivka),
+             transform var(--an-cas) var(--an-krivka);
+}
+.an-stagger.je > *{ opacity:1; transform:translate3d(0,0,0) }
+.an-stagger.je > *:nth-child(1){ transition-delay:0s }
+.an-stagger.je > *:nth-child(2){ transition-delay:.07s }
+.an-stagger.je > *:nth-child(3){ transition-delay:.14s }
+.an-stagger.je > *:nth-child(4){ transition-delay:.21s }
+.an-stagger.je > *:nth-child(5){ transition-delay:.28s }
+.an-stagger.je > *:nth-child(6){ transition-delay:.35s }
+.an-stagger.je > *:nth-child(7){ transition-delay:.42s }
+.an-stagger.je > *:nth-child(8){ transition-delay:.49s }
+.an-stagger.je > *:nth-child(n+9){ transition-delay:.56s }
+
+/* --- ukazovateľ scrollu navrchu stránky --- */
+.an-progress{
+  position:fixed;top:0;left:0;height:2px;width:100%;
+  transform:scaleX(0);transform-origin:0 50%;
+  background:currentColor;z-index:999;pointer-events:none;
+}
+
+/* --- jemný parallax (posúva sa pomalšie než stránka) --- */
+.an-parallax{ will-change:transform }
+
+/* ==========================================================
+   DÔLEŽITÉ: rešpektuj nastavenie používateľa
+   Kto má v systéme vypnuté animácie, uvidí obsah bez pohybu.
+   ========================================================== */
+@media (prefers-reduced-motion: reduce){
+  .an, .an-stagger > *{
+    opacity:1 !important;
+    transform:none !important;
+    filter:none !important;
+    clip-path:none !important;
+    transition:none !important;
+  }
+  .an-progress{ display:none }
+  .an-parallax{ transform:none !important }
+}
+
+/* --- keď JavaScript nebeží, obsah musí byť aj tak vidieť --- */
+.no-js .an, .no-js .an-stagger > *{
+  opacity:1;transform:none;filter:none;clip-path:none;
+}
