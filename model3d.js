@@ -10,10 +10,10 @@ var GEO={"plaster":{p:[-1.617,0.153,-1.82,-0.853,2.22,-1.82,0.45,1.344,-1.82,0.4
 
   /* Choreografia — celý pohyb sa nastavuje tu. p = bod scrollu (0 vrch, 1 spodok) */
   var ZASTAVKY = [
-    { p: 0.00, x:  0.0, y: 0.0, z:  0.0, rot: -0.60, sklon: 0.02, zoom: 0.88, kamY: 1.7 },
-    { p: 0.30, x: -2.4, y: 0.0, z:  0.7, rot:  0.80, sklon: 0.03, zoom: 1.08, kamY: 1.5 },
-    { p: 0.55, x:  2.3, y: 0.0, z:  1.3, rot:  3.40, sklon: 0.02, zoom: 1.28, kamY: 1.2 },
-    { p: 0.78, x: -1.8, y:-0.4, z:  0.0, rot:  4.30, sklon: 0.60, zoom: 1.10, kamY: 5.0 },
+    { p: 0.00, x:  2.6, y: 1.1, z:  0.0, rot: -0.60, sklon: 0.06, zoom: 0.82, kamY: 1.9 },
+    { p: 0.30, x: -2.6, y: 0.1, z:  0.7, rot:  0.80, sklon: 0.03, zoom: 1.05, kamY: 1.5 },
+    { p: 0.55, x:  2.5, y: 0.1, z:  1.3, rot:  3.40, sklon: 0.02, zoom: 1.22, kamY: 1.2 },
+    { p: 0.78, x: -2.1, y:-0.4, z:  0.0, rot:  4.30, sklon: 0.60, zoom: 1.05, kamY: 5.0 },
     { p: 1.00, x:  0.0, y:-0.3, z: -1.6, rot:  5.30, sklon: 0.05, zoom: 0.74, kamY: 2.0 }
   ];
   var TLMENIE = 0.07;
@@ -94,8 +94,8 @@ var GEO={"plaster":{p:[-1.617,0.153,-1.82,-0.853,2.22,-1.82,0.45,1.344,-1.82,0.4
     return ZASTAVKY[0];
   }
 
-  var ciel  = { x:0, y:0, z:0, rot:-0.60, sklon:0.02, zoom:0.88, kamY:1.7 };
-  var teraz = { x:0, y:0, z:0, rot:-0.60, sklon:0.02, zoom:0.88, kamY:1.7 };
+  var ciel  = { x:2.6, y:1.1, z:0, rot:-0.60, sklon:0.06, zoom:0.82, kamY:1.9 };
+  var teraz = { x:2.6, y:1.1, z:0, rot:-0.60, sklon:0.06, zoom:0.82, kamY:1.9 };
   var mobil = window.innerWidth < 900;
   var koniec = document.getElementById("koniec3d");
 
@@ -105,7 +105,7 @@ var GEO={"plaster":{p:[-1.617,0.153,-1.82,-0.853,2.22,-1.82,0.45,1.344,-1.82,0.4
     var p = limit > 0 ? window.scrollY / limit : 0;
     var s = stavPre(Math.min(Math.max(p, 0), 1));
     ciel.x = s.x * (mobil ? 0.26 : 1);
-    ciel.y = s.y + (mobil ? 0.75 : 0);
+    ciel.y = s.y + (mobil ? 1.5 : 0);
     ciel.z = s.z * (mobil ? 0.45 : 1);
     ciel.rot = s.rot; ciel.sklon = s.sklon;
     ciel.zoom = s.zoom * (mobil ? 0.6 : 1);
