@@ -24,9 +24,12 @@
       r.addEventListener("mouseenter", function () {
         box.innerHTML = "<b>" + (r.getAttribute("data-nazov") || "") + "</b>" +
                         "hlavná fotografia · doplní klientka";
-        box.style.background = r.style.getPropertyValue("--rc") || "#1D1D1D";
-        box.style.color = "rgba(19,19,19,.7)";
-        box.querySelector("b").style.color = "#131313";
+        var cs = getComputedStyle(r);
+        box.style.background = cs.getPropertyValue("--rc") || "#F3F2EF";
+        var tx = (cs.getPropertyValue("--rt") || "#fff").trim();
+        box.style.color = tx;
+        box.style.borderColor = "transparent";
+        box.querySelector("b").style.color = tx;
         box.classList.add("vidno");
         aktivny = true;
       });

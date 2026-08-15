@@ -46,20 +46,19 @@ var GEO={"plaster":{p:[-1.617,0.153,-1.82,-0.853,2.22,-1.82,0.45,1.344,-1.82,0.4
   var kamera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.1, 100);
   kamera.position.set(0, 1.7, 9);
 
-  scena.add(new THREE.HemisphereLight(0xF2ECE2, 0x6B6255, 0.9));
-  var slnko = new THREE.DirectionalLight(0xFFF8EC, 1.2);
+  scena.add(new THREE.HemisphereLight(0xFFFFFF, 0xBFB9AE, 0.75));
+  var slnko = new THREE.DirectionalLight(0xFFF6E4, 1.35);
   slnko.position.set(5, 8, 6); scena.add(slnko);
-  var vypln = new THREE.DirectionalLight(0x9FB4F0, 0.4);
+  var vypln = new THREE.DirectionalLight(0xC8D4E8, 0.5);
   vypln.position.set(-6, 3, -5); scena.add(vypln);
 
   var MAT = {
-    plaster:  new THREE.MeshStandardMaterial({ color: 0xD9D5C9, roughness: 0.92 }),
-    charcoal: new THREE.MeshStandardMaterial({ color: 0x1E1B18, roughness: 0.5, metalness: 0.18 }),
-    cedar:    new THREE.MeshStandardMaterial({ color: 0xA35124, roughness: 0.82 }),
-    glass:    new THREE.MeshStandardMaterial({ color: 0x7492B0, roughness: 0.1, metalness: 0.5,
-                                               transparent: true, opacity: 0.52,
-                                               emissive: 0x1B2C42, emissiveIntensity: 0.3 }),
-    deckwood: new THREE.MeshStandardMaterial({ color: 0x8E5527, roughness: 0.88 })
+    plaster:  new THREE.MeshStandardMaterial({ color: 0xBEB9AC, roughness: 0.94 }),
+    charcoal: new THREE.MeshStandardMaterial({ color: 0x22201D, roughness: 0.52, metalness: 0.16 }),
+    cedar:    new THREE.MeshStandardMaterial({ color: 0xB4551F, roughness: 0.8 }),
+    glass:    new THREE.MeshStandardMaterial({ color: 0x5C7E9B, roughness: 0.12, metalness: 0.45,
+                                               transparent: true, opacity: 0.62 }),
+    deckwood: new THREE.MeshStandardMaterial({ color: 0x9A5A25, roughness: 0.86 })
   };
 
   var model = new THREE.Group();
@@ -74,12 +73,6 @@ var GEO={"plaster":{p:[-1.617,0.153,-1.82,-0.853,2.22,-1.82,0.45,1.344,-1.82,0.4
     model.add(mesh);
   });
   model.position.y = -1.15;
-
-  var podklad = new THREE.Mesh(new THREE.CircleGeometry(3.4, 56),
-    new THREE.MeshStandardMaterial({ color: 0xE6E0D5, roughness: 1 }));
-  podklad.rotation.x = -Math.PI / 2;
-  podklad.position.y = -1.16;
-  model.add(podklad);
 
   var obal = new THREE.Group();
   obal.add(model);
@@ -115,7 +108,7 @@ var GEO={"plaster":{p:[-1.617,0.153,-1.82,-0.853,2.22,-1.82,0.45,1.344,-1.82,0.4
     var p = limit > 0 ? window.scrollY / limit : 0;
     var s = stavPre(Math.min(Math.max(p, 0), 1));
     ciel.x = s.x * (mobil ? 0.26 : 1);
-    ciel.y = s.y + (mobil ? 1.5 : 0);
+    ciel.y = s.y + (mobil ? 2.1 : 0);
     ciel.z = s.z * (mobil ? 0.45 : 1);
     ciel.rot = s.rot; ciel.sklon = s.sklon;
     ciel.zoom = s.zoom * (mobil ? 0.6 : 1);
@@ -138,15 +131,16 @@ var GEO={"plaster":{p:[-1.617,0.153,-1.82,-0.853,2.22,-1.82,0.45,1.344,-1.82,0.4
 
   if (pokoj) {
     /* jeden pekný pohľad, žiadny pohyb, žiadna slučka */
-    var stat = { x: 0, y: -0.1, z: 0.6, rot: 0.55, sklon: 0.12, zoom: 1.0, kamY: 2.2 };
+    var stat = { x: 2.4, y: 0.7, z: 0.4, rot: 0.55, sklon: 0.14, zoom: 0.95, kamY: 2.3 };
     for (var kk in stat) { teraz[kk] = stat[kk]; ciel[kk] = stat[kk]; }
-    if (mobil) { teraz.zoom = ciel.zoom = 0.62; teraz.y = ciel.y = 1.2; }
+    if (mobil) { teraz.x = ciel.x = 0; teraz.y = ciel.y = 2.3;
+                 teraz.zoom = ciel.zoom = 0.55; teraz.kamY = ciel.kamY = 2.0; }
     obal.position.set(teraz.x, teraz.y, teraz.z);
     obal.rotation.y = teraz.rot;
     obal.rotation.x = teraz.sklon;
     obal.scale.setScalar(teraz.zoom);
     kamera.position.y = teraz.kamY;
-    kamera.lookAt(0, teraz.y - 0.25, 0);
+    kamera.lookAt(teraz.x * 0.3, teraz.y - 0.35, 0);
     renderer.render(scena, kamera);
     window.addEventListener("resize", function () {
       kamera.aspect = window.innerWidth / window.innerHeight;

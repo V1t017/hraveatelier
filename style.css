@@ -6,20 +6,24 @@
    ========================================================== */
 
 :root{
-  --tma:#131313;
-  --tma2:#1D1D1D;
-  --krieda:#EFEEE9;
-  --sivá:#8A8781;
-  --linka:rgba(239,238,233,.16);
+  --tma:#FFFFFF;          /* pozadie stránky */
+  --tma2:#F3F2EF;         /* svetlejšie plochy, fotorámiky */
+  --krieda:#131313;       /* text */
+  --sivá:#84817B;
+  --linka:rgba(19,19,19,.14);
   --linka-t:rgba(19,19,19,.14);
+  --inv:#FFFFFF;          /* text na farebnom podklade */
 
   /* projektové farby — každý projekt má svoju */
-  --c1:#FF5A1F;  /* oranžová */
-  --c2:#2F5CFF;  /* modrá */
-  --c3:#00A36C;  /* zelená */
-  --c4:#F2C200;  /* žltá */
-  --c5:#B14BE8;  /* fialová */
-  --c6:#FF7BAC;  /* ružová */
+  --c1:#F2410A;  /* oranžová */
+  --c2:#1E42D8;  /* modrá */
+  --c3:#00875A;  /* zelená */
+  --c4:#E8B400;  /* žltá */
+  --c5:#9B2FD6;  /* fialová */
+  --c6:#E8558C;  /* ružová */
+  /* text na danej farbe */
+  --t1:#FFFFFF; --t2:#FFFFFF; --t3:#FFFFFF;
+  --t4:#131313; --t5:#FFFFFF; --t6:#FFFFFF;
 
   --akcent:var(--c1);   /* prepisuje sa na podstránkach */
 
@@ -40,7 +44,7 @@ img{max-width:100%;display:block}
 .uzsi{max-width:760px;margin:0 auto;padding:0 clamp(18px,3.5vw,52px)}
 :focus-visible{outline:2px solid var(--akcent);outline-offset:4px}
 .skip{position:absolute;left:-9999px}
-.skip:focus{left:20px;top:10px;z-index:200;background:var(--akcent);color:var(--tma);padding:10px 18px}
+.skip:focus{left:20px;top:10px;z-index:200;background:var(--akcent);color:#fff;padding:10px 18px}
 
 .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--sivá)}
 
@@ -51,7 +55,7 @@ img{max-width:100%;display:block}
 .draftbar a{color:var(--tma)}
 
 /* ---------- hlavička ---------- */
-.nav{position:sticky;top:0;z-index:80;background:rgba(19,19,19,.82);
+.nav{position:sticky;top:0;z-index:80;background:rgba(255,255,255,.88);
   backdrop-filter:blur(16px);border-bottom:1px solid var(--linka)}
 .nav-in{max-width:1400px;margin:0 auto;padding:0 clamp(18px,3.5vw,52px);height:62px;
   display:flex;align-items:center;justify-content:space-between;gap:16px}
@@ -82,7 +86,8 @@ img{max-width:100%;display:block}
 .nav-check:checked ~ .nav-toggle span:nth-child(3){transform:translateY(-5.5px) rotate(-45deg)}
 @media(max-width:860px){
   .nav-toggle{display:flex}
-  .nav-links{position:absolute;top:100%;left:0;right:0;background:var(--tma);
+  .nav-links{position:absolute;top:100%;left:0;right:0;background:#fff;
+    box-shadow:0 16px 40px rgba(19,19,19,.1);
     border-bottom:1px solid var(--linka);flex-direction:column;align-items:stretch;gap:0;
     padding:6px clamp(18px,3.5vw,52px) 20px;display:none}
   .nav-check:checked ~ .nav-links{display:flex}
@@ -93,11 +98,11 @@ img{max-width:100%;display:block}
 .btn{display:inline-block;font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;
   text-transform:uppercase;padding:16px 28px;text-decoration:none;border:0;cursor:pointer;
   transition:transform .16s,background .16s,color .16s}
-.btn-plny{background:var(--akcent);color:var(--tma)}
+.btn-plny{background:var(--akcent);color:#fff}
 .btn-plny:hover{transform:translate(-2px,-2px)}
-.btn-obrys{border:1px solid var(--linka);color:var(--krieda)}
-.btn-obrys:hover{background:var(--krieda);color:var(--tma);border-color:var(--krieda)}
-.btn-tmavy{background:var(--tma);color:var(--krieda)}
+.btn-obrys{border:1px solid var(--krieda);color:var(--krieda)}
+.btn-obrys:hover{background:var(--krieda);color:#fff}
+.btn-tmavy{background:var(--krieda);color:#fff}
 .btn-tmavy:hover{transform:translate(-2px,-2px)}
 
 /* ==========================================================
@@ -115,12 +120,15 @@ img{max-width:100%;display:block}
 @media(min-width:1000px){
   .hero h1,.hero-spod{max-width:56%}   /* pravá polovica patrí modelu */
 }
+@media(max-width:999px){
+  .hero{min-height:100vh;padding-top:46vh}   /* horná polovica patrí modelu */
+}
 .hero h1 .r2{display:block;padding-left:.09em}
 .hero h1 .r3{display:block;padding-left:.22em}
 .hero h1 u{text-decoration:none;color:var(--c1)}
 .hero-spod{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;
   margin-top:clamp(36px,6vw,72px);flex-wrap:wrap}
-.hero-spod p{max-width:32ch;font-size:clamp(15px,1.5vw,18px);color:#B6B3AC}
+.hero-spod p{max-width:32ch;font-size:clamp(15px,1.5vw,18px);color:#5A5751}
 .sipka{font-family:var(--mono);font-size:9px;letter-spacing:.24em;text-transform:uppercase;
   color:var(--sivá);animation:bob 2.6s ease-in-out infinite}
 @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
@@ -133,11 +141,11 @@ img{max-width:100%;display:block}
 .panel .cislo{font-family:var(--mono);font-size:11px;letter-spacing:.2em;
   color:var(--akcent);display:block;margin-bottom:16px}
 .panel h2{font-size:clamp(30px,4.4vw,58px);margin-bottom:14px;text-transform:lowercase}
-.panel p{color:#B6B3AC;font-size:16.5px}
+.panel p{color:#5A5751;font-size:16.5px}
 @media(max-width:900px){
   .panel-in,.panel.vpravo .panel-in{max-width:none;margin:0}
   .panel{align-items:flex-end;padding:70px 0}
-  .panel-in{background:rgba(19,19,19,.9);padding:26px 24px;border:1px solid var(--linka)}
+  .panel-in{background:rgba(255,255,255,.92);padding:26px 24px;border:1px solid var(--linka)}
 }
 
 /* ---------- sekcie ---------- */
@@ -146,7 +154,7 @@ section.pruh{padding:0}
 .hlava{display:flex;justify-content:space-between;align-items:flex-end;gap:26px;
   flex-wrap:wrap;margin-bottom:clamp(30px,4vw,56px)}
 .hlava h2{font-size:clamp(34px,6.5vw,88px);text-transform:lowercase;letter-spacing:-.05em}
-.text{max-width:60ch;font-size:clamp(17px,1.8vw,21px);color:#B6B3AC}
+.text{max-width:60ch;font-size:clamp(17px,1.8vw,21px);color:#4E4B46}
 .text p+p{margin-top:18px}
 .text strong{color:var(--krieda);font-weight:500}
 
@@ -166,10 +174,10 @@ section.pruh{padding:0}
 .riadok .meta{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;
   text-transform:uppercase;color:var(--sivá);text-align:right;transition:color .28s;
   display:flex;flex-direction:column;gap:5px}
-.riadok:hover{background:var(--rc);color:var(--tma)}
-.riadok:hover .idx,.riadok:hover .meta{color:rgba(19,19,19,.72)}
+.riadok:hover{background:var(--rc);color:var(--rt)}
+.riadok:hover .idx,.riadok:hover .meta{color:var(--rt);opacity:.72}
 .riadok:hover h3{transform:translateX(clamp(6px,1vw,16px))}
-.riadok:focus-visible{background:var(--rc);color:var(--tma);outline-offset:-3px}
+.riadok:focus-visible{background:var(--rc);color:var(--rt);outline-offset:-3px}
 .riadok.hide{display:none}
 @media(max-width:620px){
   .riadok{grid-template-columns:38px 1fr;row-gap:6px}
@@ -213,10 +221,10 @@ section.pruh{padding:0}
 /* ==========================================================
    FAREBNÝ PRUH — plný záber
    ========================================================== */
-.blok{background:var(--akcent);color:var(--tma);padding:clamp(70px,9vw,130px) 0}
+.blok{background:var(--akcent);color:var(--inv);padding:clamp(70px,9vw,130px) 0}
 .blok h2{font-size:clamp(34px,7vw,96px);text-transform:lowercase;letter-spacing:-.05em;max-width:14ch}
-.blok p{max-width:52ch;margin-top:22px;font-size:clamp(17px,1.8vw,21px);color:rgba(19,19,19,.78)}
-.blok .lbl{color:rgba(19,19,19,.6)}
+.blok p{max-width:52ch;margin-top:22px;font-size:clamp(17px,1.8vw,21px);color:rgba(255,255,255,.82)}
+.blok .lbl{color:rgba(255,255,255,.66)}
 
 /* ---------- postup ---------- */
 .postup{border-top:1px solid var(--linka)}
@@ -225,7 +233,7 @@ section.pruh{padding:0}
   align-items:baseline}
 .krok .idx{font-family:var(--mono);font-size:12px;color:var(--akcent);letter-spacing:.1em}
 .krok h3{font-size:clamp(21px,2.6vw,34px);text-transform:lowercase}
-.krok p{color:#B6B3AC;font-size:16px}
+.krok p{color:#5A5751;font-size:16px}
 @media(max-width:760px){.krok{grid-template-columns:1fr;gap:10px}}
 
 /* ==========================================================
@@ -235,7 +243,7 @@ section.pruh{padding:0}
 .p-hlava .lbl{display:block;margin-bottom:20px}
 .p-hlava h1{font-size:clamp(38px,9vw,140px);text-transform:lowercase;letter-spacing:-.055em;
   line-height:.86;max-width:13ch}
-.p-hlava .claim{max-width:46ch;margin-top:26px;font-size:clamp(17px,1.9vw,22px);color:#B6B3AC}
+.p-hlava .claim{max-width:46ch;margin-top:26px;font-size:clamp(17px,1.9vw,22px);color:#5A5751}
 .p-foto{aspect-ratio:16/9;margin-top:clamp(34px,5vw,64px)}
 
 .udaje{display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid var(--linka);
@@ -276,7 +284,7 @@ section.pruh{padding:0}
   border-bottom:1px solid var(--linka);background:transparent;font-family:var(--body);
   font-size:17px;color:var(--krieda)}
 .f input:focus,.f textarea:focus,.f select:focus{outline:0;border-bottom-color:var(--akcent)}
-.f select option{background:var(--tma)}
+.f select option{background:#fff}
 .f textarea{min-height:120px;resize:vertical}
 .f2{display:grid;grid-template-columns:1fr 1fr;gap:22px}
 .karta-k{border-top:1px solid var(--linka);padding:26px 0}
@@ -286,17 +294,17 @@ section.pruh{padding:0}
 @media(max-width:900px){.kontakt{grid-template-columns:1fr}}
 
 /* ---------- päta ---------- */
-footer{background:var(--krieda);color:var(--tma);padding:clamp(60px,8vw,110px) 0 36px;
-  position:relative;z-index:2}
+footer{background:var(--tma2);color:var(--krieda);padding:clamp(60px,8vw,110px) 0 36px;
+  position:relative;z-index:2;border-top:1px solid var(--linka)}
 footer h2{font-size:clamp(38px,8vw,120px);text-transform:lowercase;letter-spacing:-.055em;
   max-width:11ch;margin-bottom:34px}
 footer h2 u{text-decoration:none;color:var(--c2)}
 .foot{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;
   padding-top:34px;border-top:1px solid var(--linka-t)}
 .foot h5{font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;
-  color:#6E6B65;margin-bottom:14px}
+  color:var(--sivá);margin-bottom:14px}
 .foot a{display:block;text-decoration:none;padding:4px 0;font-size:16px}
 .foot a:hover{color:var(--c2)}
-.legal{margin-top:44px;font-family:var(--mono);font-size:9px;color:#6E6B65;
+.legal{margin-top:44px;font-family:var(--mono);font-size:9px;color:var(--sivá);
   display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;
   text-transform:uppercase;letter-spacing:.14em}
